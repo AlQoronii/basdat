@@ -1,41 +1,49 @@
 <?php
-include_once 'koneksi.php';
+include_once '../config/koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $username = isset($_POST["username"]) ? $_POST["username"] : '';
+    $password = isset($_POST["password"]) ? $_POST["password"] : '';
 
-    // Validate and sanitize input (add more validation as needed)
-    $username = filter_var($username, FILTER_SANITIZE_STRING);
-    $password = filter_var($password, FILTER_SANITIZE_STRING);
+    // Query to retrieve user data based on the provided username
+    $sql = "SELECT id_petugas, nama_petugas, password, level FROM petugas WHERE username = ?";
 
-    // Query the database to check petugas credentials
-    $sql = "SELECT id_petugas, username, password, level FROM petugas WHERE username = ?";
+    // Use prepared statements to prevent SQL injection
     $stmt = odbc_prepare($connection, $sql);
 
     if ($stmt) {
         // Execute the statement with parameters
         if (odbc_execute($stmt, array($username))) {
             // Fetch the result
-            $row = odbc_fetch_array($stmt);
+            $result = odbc_fetch_array($stmt);
 
-            if ($row && password_verify($password, $row['password'])) {
-                // Login successful, create session
-                session_start();
-                $_SESSION['user_id'] = $row['id_petugas'];
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['level'] = $row['level'];
+            if ($result) {
+                // Verify the password
+                if (password_verify($password, $result['password'])) {
+                    // Password is correct, set session variables or perform other actions
+                    session_start();
+                    $_SESSION['id_petugas'] = $result['id_petugas'];
+                    $_SESSION['nama_petugas'] = $result['nama_petugas'];
+                    $_SESSION['level'] = $result['level'];
 
-                // Redirect to the petugas dashboard
-                header("Location: petugas_dashboard.php");
-                exit();
+                    // Redirect based on the user's level
+                    if ($result['level'] == 'admin') {
+                        header("Location: ../Pages/admin/index.php");
+                    } elseif ($result['level'] == 'petugas') {
+                        header("Location: ../Pages/petugas/index.php");
+                    } else {
+                        echo "Unknown user level. Please contact the administrator.";
+                    }
+                    exit; // Stop further execution after redirect
+                } else {
+                    echo "Invalid password. Please try again.";
+                }
             } else {
-                // Invalid username or password
-                echo "Invalid username or password. Please try again.";
+                echo "User not found. Please check your username.";
             }
         } else {
-            echo "Database error: " . odbc_errormsg();
+            echo "Login failed. Please try again.";
         }
 
         // Close the statement

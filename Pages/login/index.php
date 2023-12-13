@@ -46,6 +46,9 @@
                         <i class="fas fa-lock"></i>
                         <input type="password" name="password" placeholder="Password" required />
                     </div>
+                    <div class="col-8">
+                        <a href="../landing/index.php" style="text-decoration:none;"><span style="color:black; ">Kembali ke-home </span>klik disini</a>
+                    </div>
                     <input type="submit" value="Daftar" class="btn solid" />
 
                 </form>

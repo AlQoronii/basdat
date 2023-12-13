@@ -94,7 +94,7 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-success text-white" href="../login/login.php">Login</a>
+                        <a class="nav-link btn btn-success text-white" href="../login/index.php">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn btn-light" href="#">Daftar</a>

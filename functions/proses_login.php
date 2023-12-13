@@ -1,61 +1,55 @@
 <?php
-// Include koneksi.php for database connection
-require_once "../config/koneksi.php";
-
+include_once '../config/koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $username = isset($_POST["username"]) ? $_POST["username"] : '';
+    $password = isset($_POST["password"]) ? $_POST["password"] : '';
 
-    // Query the database to check user credentials
-    $sql = "SELECT id_petugas, username, password, level FROM petugas WHERE username = ?";
+    // Establishes the connection
+
+
+    // Query to retrieve user data based on the provided username
+    $sql = "SELECT nik, nama, password FROM masyarakat WHERE username = ?";
+
+    // Use prepared statements to prevent SQL injection
     $stmt = odbc_prepare($connection, $sql);
 
     if ($stmt) {
         // Execute the statement with parameters
         if (odbc_execute($stmt, array($username))) {
             // Fetch the result
-            $row = odbc_fetch_array($stmt);
+            $result = odbc_fetch_array($stmt);
 
-            if ($row && password_verify($password, $row['password'])) {
-                // Start a session
-                session_start();
-                // Store user information in session variables
-                $_SESSION['user_id'] = $row['id_petugas'];
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['level'] = $row['level'];
-
-                // Redirect to the appropriate dashboard
-                if ($row['level'] == 'admin') {
-                    header("Location: admin_dashboard.php");
-                } elseif ($row['level'] == 'petugas') {
-                    header("Location: petugas_dashboard.php");
+            if ($result) {
+                // Verify the password
+                if (password_verify($password, $result['password'])) {
+                    // Password is correct, set session variables or perform other actions
+                    session_start();
+                    $_SESSION['nik'] = $result['nik'];
+                    $_SESSION['nama'] = $result['nama'];
+                    echo "Login successful. Redirecting to dashboard...";
+                    // You can add a header redirect here
+                    header("Location: dashboard.php");
+                } else {
+                    echo "Invalid password. Please try again.";
                 }
-                exit();
             } else {
-                // Invalid username or password
-                header("Location: login.php?error=invalid");
-                exit();
+                echo "User not found. Please check your username.";
             }
         } else {
-            // Database error
-            header("Location: login.php?error=db");
-            exit();
+            echo "Login failed. Please try again.";
         }
 
         // Close the statement
         odbc_free_result($stmt);
     } else {
-        // Database error
-        header("Location: login.php?error=db");
-        exit();
+        echo "Database error: " . odbc_errormsg();
     }
 
     // Close the connection
     odbc_close($connection);
 } else {
-    // Invalid request method
-    header("Location: login.php");
-    exit();
+    // Handle invalid request method
+    echo "Invalid request method.";
 }
