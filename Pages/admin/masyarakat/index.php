@@ -1,5 +1,6 @@
 <?php
-
+    $database = new Database();
+    $connection = $database->getConnection();
 
 // Query untuk mengambil data masyarakat
 $queryMasyarakat = "SELECT * FROM masyarakat"; // Sesuaikan dengan kolom yang diperlukan

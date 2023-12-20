@@ -1,5 +1,6 @@
 <?php
-
+    $database = new Database();
+    $connection = $database->getConnection();
 // Query untuk mengambil data tanggapan
 $queryTanggapan = "SELECT t.*, p.laporan, m.nama AS nama_masyarakat, petugas.nama_petugas
                    FROM tanggapan t

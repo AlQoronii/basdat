@@ -1,5 +1,6 @@
 <?php
-
+    $database = new Database();
+    $connection = $database->getConnection();
 // Query untuk mengambil data aduan terbaru
 $queryAduan = "SELECT TOP 8 p.*, m.nama AS nama_masyarakat, k.nama_kategori, sp.nama_status
                FROM pengaduan p
@@ -100,6 +101,7 @@ $rowCountMasyarakat = odbc_fetch_array($resultCountMasyarakat);
                         <td>Laporan</td>
                         <td>Foto</td>
                         <td>Status</td>
+                        <td>Aksi</td>
                     </tr>
                 </thead>
 
@@ -112,6 +114,11 @@ $rowCountMasyarakat = odbc_fetch_array($resultCountMasyarakat);
                             <td><?php echo $rowAduan['laporan']; ?></td>
                             <td><?php echo $rowAduan['foto']; ?></td>
                             <td><span class="status <?php echo strtolower($rowAduan['nama_status']); ?>"><?php echo $rowAduan['nama_status']; ?></span></td>
+                            <td>
+                                <a href='' data-bs-toggle="modal" data-bs-target="#" class="btn btn-warning btn-m m-1"><i class="fa fa-pencil-square-o"></i></a>
+                                <a href="" onclick="javascript:return confirm('Hapus Data Buku?');" class="btn btn-danger btn-m m-1"><i class="fa fa-trash"></i></a>
+                                
+                            </td>
                         </tr>
                     <?php
                     }
@@ -149,6 +156,7 @@ $rowCountMasyarakat = odbc_fetch_array($resultCountMasyarakat);
                             <h4><?php echo $rowPelanggan['nama']; ?> </h4>
                         </td>
                     </tr>
+                    
                 <?php
                 }
                 ?>

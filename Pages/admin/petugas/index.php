@@ -1,5 +1,6 @@
 <?php
-
+    $database = new Database();
+    $connection = $database->getConnection();
 
 // Query untuk mengambil data petugas
 $queryPetugas = "SELECT * FROM petugas"; // Sesuaikan dengan kolom yang diperlukan

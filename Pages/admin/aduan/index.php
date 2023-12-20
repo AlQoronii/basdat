@@ -1,5 +1,6 @@
 <?php
-
+    $database = new Database();
+    $connection = $database->getConnection();
 // Query untuk mengambil data aduan
 $queryAduan = "SELECT p.*, m.nama AS nama_masyarakat, k.nama_kategori, sp.nama_status
                FROM pengaduan p

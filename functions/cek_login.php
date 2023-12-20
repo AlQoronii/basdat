@@ -1,10 +1,17 @@
 <?php
-include_once '../config/koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $username = isset($_POST["username"]) ? $_POST["username"] : '';
     $password = isset($_POST["password"]) ? $_POST["password"] : '';
+
+    include_once '../config/koneksi.php';
+    $database = new Database();
+    $connection = $database->getConnection();
+
+    if (!$connection) {
+        die("Connection failed: " . odbc_errormsg());
+    }
 
     // Query to retrieve user data based on the provided username
     $sql = "SELECT id_petugas, nama_petugas, password, level FROM petugas WHERE username = ?";
@@ -20,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($result) {
                 // Verify the password
-                
                 if ($password === $result['password']) {
                     // Password is correct, set session variables or perform other actions
                     session_start();
@@ -31,10 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Redirect based on the user's level
                     if ($result['level'] == 'admin' || $result['level'] == 'petugas') {
                         header("Location: ../index.php");
+                        exit; // Stop further execution after redirect
                     } else {
                         echo "Unknown user level. Please contact the administrator.";
                     }
-                    exit; // Stop further execution after redirect
                 } else {
                     echo "Invalid password. Please try again.";
                 }
@@ -57,3 +63,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Handle invalid request method
     echo "Invalid request method.";
 }
+?>
