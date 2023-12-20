@@ -37,38 +37,56 @@ if (!$resultAduan) {
             <img src="assets/imgs/customer01.jpg" alt="">
         </div>
     </div>
-<div class="details">
-    <div class="recentOrders">
-        <div class="cardHeader">
-            <h2>Aduan Terbaru</h2>
-            <a href="#" class="btn">View All</a>
-        </div>
+    <div class="details">
+        <div class="recentOrders">
+            <div class="cardHeader">
+                <h2>Aduan Terbaru</h2>
+                <a href="#" class="btn">View All</a>
+            </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <td>Nama</td>
-                    <td>Laporan</td>
-                    <td>Foto</td>
-                    <td>Status</td>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php
-                while ($rowAduan = odbc_fetch_array($resultAduan)) {
-                ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><?php echo $rowAduan['nama_masyarakat']; ?></td>
-                        <td><?php echo $rowAduan['laporan']; ?></td>
-                        <td><?php echo $rowAduan['foto']; ?></td>
-                        <td><span class="status <?php echo strtolower($rowAduan['nama_status']); ?>"><?php echo $rowAduan['nama_status']; ?></span></td>
+                        <td>Nama</td>
+                        <td>Laporan</td>
+                        <td>Foto</td>
+                        <td>Status</td>
+                        <td>Aksi</td>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-</div>
+                </thead>
+
+                <tbody>
+                    <?php
+                    while ($rowAduan = odbc_fetch_array($resultAduan)) {
+                    ?>
+                        <tr>
+                            <td><?php echo $rowAduan['nama_masyarakat']; ?></td>
+                            <td><?php echo $rowAduan['laporan']; ?></td>
+                            <td><?php echo $rowAduan['foto']; ?></td>
+                            <td><span class="status <?php echo strtolower($rowAduan['nama_status']); ?>"><?php echo $rowAduan['nama_status']; ?></span></td>
+                            <td>
+                            <?php   
+                                if ($rowAduan->status == 'Terkirim')
+                            ?>
+                                <a href="index.php?Diproses, $rowAduan->id_pengaduan" class="btn btn-primary"><i class="fas fa-keyboard"></i> Diproses</a>
+                            <?php
+                                elseif($$rowAduan->status == 'Diproses')
+                            ?>
+                                <a href="index.php?Selesai ,$rowAduan->id_pengaduan" class="btn btn-success"><i class="fas fa-check"></i> Selesaikan</a>
+                            <?php        
+                                else                
+                            ?>
+                            <?php
+                                endif
+                                ?>
+                                <a href="tanggapan/index.php?id_pengaduan=<?= $rowAduan['id_pengaduan'] ?>" class="btn btn-warning"><i class="far fa-comment-dots"></i> Tanggapi</a>
+                                
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 </div>
