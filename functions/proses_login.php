@@ -6,8 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = isset($_POST["username"]) ? $_POST["username"] : '';
     $password = isset($_POST["password"]) ? $_POST["password"] : '';
 
-    // Establishes the connection
-
+    // Establish the connection
 
     // Query to retrieve user data based on the provided username
     $sql = "SELECT nik, nama, password FROM masyarakat WHERE username = ?";
@@ -28,9 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     session_start();
                     $_SESSION['nik'] = $result['nik'];
                     $_SESSION['nama'] = $result['nama'];
+                    $_SESSION['password'] = $result['password'];
                     echo "Login successful. Redirecting to dashboard...";
                     // You can add a header redirect here
-                    header("Location: dashboard.php");
+                    header("Location: ../Pages/user/index.php");
+                    exit();
                 } else {
                     echo "Invalid password. Please try again.";
                 }
@@ -53,3 +54,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Handle invalid request method
     echo "Invalid request method.";
 }
+?>

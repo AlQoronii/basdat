@@ -1,5 +1,5 @@
 <?php
-$serverName = "EDDO";
+$serverName = "DESKTOP-322D3F1";
 $database = "db_pengaduan";
 
 // ODBC Connection
