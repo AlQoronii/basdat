@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
     <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="../../assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="assets/css/styleAdmin.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="index.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -34,7 +34,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="index.php?page=masyarakat">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -43,7 +43,16 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="index.php?page=petugas">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Petugas</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.php?page=aduan">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -52,7 +61,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="index.php?page=tanggapan">
                         <span class="icon">
                             <ion-icon name="mail-open-outline"></ion-icon>
                         </span>
@@ -61,7 +70,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="functions/logout.php">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

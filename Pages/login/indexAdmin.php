@@ -121,21 +121,21 @@
             <p class="login-box-msg">Sign in to start your session</p>
 
             <!-- Your login form goes here -->
-            <form action="../../functions/proses_loginAdmin.php" method="post">
+            <form action="../../functions/cek_login.php" method="post">
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" required>
-                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="username" required>
+                    
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" required>
-                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="password" required>
+                    
                     <div class="password-toggle" onclick="togglePasswordVisibility(this)">
                         <i class="fas fa-eye-slash"></i>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-8">
-                        <p>kembali ke home</p><a href="../landing/index.php">klik disini</a>
+                        <a href="../landing/index.php">kembali ke home</a>
                     </div>
                     <!-- /.col -->
                     <div class="col-4">

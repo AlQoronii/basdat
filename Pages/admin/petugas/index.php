@@ -1,6 +1,5 @@
 <?php
-include("../templates/header.php");
-include_once("../../../config/koneksi.php"); // Menghubungkan ke database
+
 
 // Query untuk mengambil data petugas
 $queryPetugas = "SELECT * FROM petugas"; // Sesuaikan dengan kolom yang diperlukan
@@ -15,6 +14,23 @@ if (!$resultPetugas) {
 ?>
 
 <!-- ================ List of Officers/Petugas ================ -->
+<div class="main">
+    <div class="topbar">
+        <div class="toggle">
+            <ion-icon name="menu-outline"></ion-icon>
+        </div>
+
+        <div class="search">
+            <label>
+                <input type="text" placeholder="Search here">
+                <ion-icon name="search-outline"></ion-icon>
+            </label>
+        </div>
+
+        <div class="user">
+            <img src="assets/imgs/customer01.jpg" alt="">
+        </div>
+    </div>
 <div class="details">
     <div class="recentCustomers">
         <div class="cardHeader">
@@ -52,5 +68,4 @@ if (!$resultPetugas) {
         </table>
     </div>
 </div>
-
-<?php include("../templates/footer.php"); ?>
+</div>

@@ -105,7 +105,7 @@
                         <a class="nav-link" href="history.php"><h5>History</h5></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact"><h5>Logout</h5></a>
+                        <a class="nav-link" href="../../functions/logout.php"><h5>Logout</h5></a>
                     </li>
                 </ul>
             </div>

@@ -29,10 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['level'] = $result['level'];
 
                     // Redirect based on the user's level
-                    if ($result['level'] == 'admin') {
-                        header("Location: ../Pages/admin/home.php");
-                    } elseif ($result['level'] == 'petugas') {
-                        header("Location: ../Pages/petugas/index.php");
+                    if ($result['level'] == 'admin' || $result['level'] == 'petugas') {
+                        header("Location: ../index.php");
                     } else {
                         echo "Unknown user level. Please contact the administrator.";
                     }

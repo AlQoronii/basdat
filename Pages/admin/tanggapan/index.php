@@ -1,6 +1,4 @@
 <?php
-include("../templates/header.php");
-include_once("../../../config/koneksi.php"); // Menghubungkan ke database
 
 // Query untuk mengambil data tanggapan
 $queryTanggapan = "SELECT t.*, p.laporan, m.nama AS nama_masyarakat, petugas.nama_petugas
@@ -20,6 +18,23 @@ if (!$resultTanggapan) {
 ?>
 
 <!-- ================ List of Responses/Tanggapan ================ -->
+<div class="main">
+    <div class="topbar">
+        <div class="toggle">
+            <ion-icon name="menu-outline"></ion-icon>
+        </div>
+
+        <div class="search">
+            <label>
+                <input type="text" placeholder="Search here">
+                <ion-icon name="search-outline"></ion-icon>
+            </label>
+        </div>
+
+        <div class="user">
+            <img src="assets/imgs/customer01.jpg" alt="">
+        </div>
+    </div>
 <div class="details">
     <div class="recentOrders">
         <div class="cardHeader">
@@ -56,5 +71,4 @@ if (!$resultTanggapan) {
         </table>
     </div>
 </div>
-
-<?php include("../templates/footer.php"); ?>
+</div>
