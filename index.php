@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     if (isset($_SESSION["id_petugas"]) && isset($_SESSION["level"])) {
         include "config/koneksi.php";
         $userLevel = $_SESSION["level"];
+        $idPetugas = $_SESSION['id_petugas'];
 
         if ($userLevel == "admin") {
             if (!empty($_GET['page'])) {

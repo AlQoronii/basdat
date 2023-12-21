@@ -1,12 +1,19 @@
 <?php
+
     include 'functions/Class/pengaduan.php';
+    include 'functions/Class/tanggapan.php';
+    $database = new Database();
+    $connection = $database->getConnection();
+    $tanggapan = new Tanggapan($connection);
+   
+    $add = $tanggapan->addTanggapan();
+
 
     $pengaduan = new Pengaduan();
     $queryAduan = $pengaduan->selectPengaduan();
 
-    $database = new Database();
-    $connection = $database->getConnection();
-
+   
+    $id_petugas = $_SESSION["id_petugas"];
 $resultAduan = odbc_exec($connection, $queryAduan);
 
 // Mengecek apakah query berhasil dieksekusi
@@ -14,6 +21,7 @@ if (!$resultAduan) {
     die("Query failed: " . odbc_errormsg());
 }
 ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-TygpuPtXnWshq8Uwru4ZrBfDewHxqzWu2Kluz9o1ur5An1LQSLtmo8gO3yZK7uf" crossorigin="anonymous">
 
 
 <!-- ================ Order Details List ================= -->
@@ -22,14 +30,6 @@ if (!$resultAduan) {
         <div class="toggle">
             <ion-icon name="menu-outline"></ion-icon>
         </div>
-
-        <div class="search">
-            <label>
-                <input type="text" placeholder="Search here">
-                <ion-icon name="search-outline"></ion-icon>
-            </label>
-        </div>
-
         <div class="user">
             <img src="assets/imgs/customer01.jpg" alt="">
         </div>
@@ -55,6 +55,35 @@ if (!$resultAduan) {
         <?php
         while ($rowAduan = odbc_fetch_array($resultAduan)) {
             ?>
+            <form method="post" index.php?page=aduan>
+            <div id="myModal<?= $rowAduan['id_pengaduan'] ?>" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Pengaduan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <p><strong>NIK:</strong> <?= $rowAduan['nik'] ?></p>
+                            <p><strong>Nama:</strong> <?= $rowAduan['nama_masyarakat'] ?></p>
+                            <p><strong>Laporan:</strong> <?= $rowAduan['laporan'] ?></p>
+                            <div class="mb-3">
+                                <label for="response<?= $rowAduan['id_pengaduan'] ?>" class="form-label">Tanggapan:</label>
+                                <textarea class="form-control" id="tanggapan" name="tanggapan"></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="tanggal" value="<?= $rowAduan['tanggal'] ?>">
+                        <input type="hidden" name="id_petugas" value="<?= $id_petugas ?>">
+                        <input type="hidden" name="id_pengaduan" value="<?= $rowAduan['id_pengaduan'] ?>">
+                        <div class="modal-footer">
+                            <button type="submit" name="submit" class="btn btn-primary" >Submit Response</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
             <tr>
                 <td><?= $rowAduan['nama_masyarakat'] ?></td>
                 <td><?=$rowAduan['laporan'] ?></td>
@@ -69,7 +98,7 @@ if (!$resultAduan) {
                     <?php } else { ?>
                 
                     <?php } ?>
-                    <a href="pages/admin/aduan/indexTanggapan.php?id_pengaduan=<?= $rowAduan['id_pengaduan'] ?>" class="btn-coba">Tanggapi</a>
+                    <a href='index.php?page=edit&id=<?= $rowAduan['id_pengaduan'] ?>' data-bs-toggle="modal" data-bs-target="#myModal<?= $rowAduan['id_pengaduan'] ?>" class="btn-coba">Tanggapi</a>
 
                     </div>
                     <?php
@@ -99,3 +128,4 @@ if (!$resultAduan) {
             </table>
         </div>
 </div>
+

@@ -18,9 +18,9 @@ $stmt = odbc_prepare($connection, $query);
 
 if ($stmt) {
     // Execute the statement and fetch the row
-    odbc_execute($stmt, []);
+    odbc_execute($stmt, array($id));
     $row = odbc_fetch_array($stmt);
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +38,7 @@ if ($stmt) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 
     <script src="https://kit.fontawesome.com/b450899c31.js" crossorigin="anonymous"></script>
+
 </head>
 
 <style>
@@ -135,6 +136,30 @@ if ($stmt) {
                 </li>
             </ul>
         </div>
+
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                </div>
+                <?php if (isset($row)) : ?>
+                <div class="details">
+                    <div class="recentOrders">
+                        <h2>Pengaduan - <?php $row['tanggal']; ?> | <?php $row['nama_status']; ?></h2>
+                    </div>
+                    <p></p>
+                </div>
+            
+        </div>
+
+
+<!-- 
+        <div class="main">
+    <div class="topbar">
+        <div class="toggle">
+            <ion-icon name="menu-outline"></ion-icon>
+        </div>
         <?php if (isset($row)) : ?>
             <div class="container-fluid">
                 <div class="row">
@@ -144,36 +169,42 @@ if ($stmt) {
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Pengaduan - <?php echo $row['tanggal']; ?> | <?php echo $row['nama_status']; ?></h5>
+                                <h5 class="card-title">Pengaduan - <?php $row['tanggal']; ?> | <?php $row['nama_status']; ?></h5>
                             </div>
                             <div class="card-body">
-                                <div class="form-group row">
-                                    <label class="col-md-2">NIK</label>
-                                    <input type="text" class="form-control col-md-4" value="<?php echo $row['nik']; ?>" disabled>
+                                <div class="mb-3">
+                                    <label class="col-form-label col-md-2">NIK</label>
+                                    <input type="text" class="form-control col-md-4" value="<?php echo $row['nik']; ?>">
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-md-2">Nama</label>
-                                    <input type="text" class="form-control col-md-4" value="<?php echo $row['nama']; ?>" disabled>
+                                <div class="mb-3">
+                                    <label class="col-form-label col-md-2">Nama</label>
+                                    <input type="text" class="form-control col-md-4" value="<?php echo $row['nama']; ?>">
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-md-2">Isi</label>
+                                <div class="mb-3">
+                                    <label class="col-form-label col-md-2">Isi</label>
                                     <textarea rows="10" disabled class="form-control col-md-10"><?php echo $row['laporan']; ?></textarea>
                                 </div>
                                 <form action="/tambahtanggapan" method="POST">
-                                    <div class="form-group row">
-                                        <label class="col-md-2">Tanggapan</label>
+                                    <div class="mb-3">
+                                        <label class="col-form-label col-md-2">Tanggapan</label>
                                         <input type="hidden" name="id" value="<?php echo $row['id_pengaduan']; ?>">
                                         <textarea rows="10" class="form-control col-md-10" name="isi"></textarea>
                                     </div>
-                                    <a href="/pengaduan" class="btn btn-secondary ml-3 float-right"><i class="fas fa-undo-alt"></i> Kembali</a>
-                                    <button type="submit" class="btn btn-warning float-right"><i class="fas fa-paper-plane"></i> Kirim</button>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <a href="/pengaduan" class="btn btn-secondary me-md-2"><i class="fas fa-undo-alt"></i> Kembali</a>
+                                        <button type="submit" class="btn btn-warning"><i class="fas fa-paper-plane"></i> Kirim</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php endif; ?>
+        <?php endif; } ?>
+    </div>
+</div> -->
+
+        
 
         <!-- =========== Scripts =========  -->
         <script src="../../../assets/js/admin.js"></script>
