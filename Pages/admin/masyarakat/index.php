@@ -1,6 +1,6 @@
 <?php
-    $database = new Database();
-    $connection = $database->getConnection();
+$database = new Database();
+$connection = $database->getConnection();
 
 // Query untuk mengambil data masyarakat
 $queryMasyarakat = "SELECT * FROM masyarakat"; // Sesuaikan dengan kolom yang diperlukan
@@ -32,39 +32,40 @@ if (!$resultMasyarakat) {
             <img src="assets/imgs/customer01.jpg" alt="">
         </div>
     </div>
-<div class="details">
-    <div class="recentCustomers">
-        <div class="cardHeader">
-            <h2>List of Users</h2>
-        </div>
+    <div class="details">
+        <div class="recentCustomers">
+            <div class="cardHeader">
+                <h2>List of Users</h2>
+            </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <td>NIK</td>
-                    <td>Nama</td>
-                    <td>Username</td>
-                    <td>No. Telepon</td>
-                    <!-- Tambahkan kolom lain yang diperlukan -->
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php
-                while ($rowMasyarakat = odbc_fetch_array($resultMasyarakat)) {
-                ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><?php echo $rowMasyarakat['nik']; ?></td>
-                        <td><?php echo $rowMasyarakat['nama']; ?></td>
-                        <td><?php echo $rowMasyarakat['username']; ?></td>
-                        <td><?php echo $rowMasyarakat['noTelp']; ?></td>
-                        <!-- Tambahkan baris lain sesuai dengan kolom yang diperlukan -->
+                        <td>NIK</td>
+                        <td>Nama</td>
+                        <td>Username</td>
+                        <td>Password</td>
+                        <td>No. Telepon</td>
+                        <td>level</td>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    <?php
+                    while ($rowMasyarakat = odbc_fetch_array($resultMasyarakat)) {
+                    ?>
+                        <tr>
+                            <td><?php echo $rowMasyarakat['nik']; ?></td>
+                            <td><?php echo $rowMasyarakat['nama']; ?></td>
+                            <td><?php echo $rowMasyarakat['username']; ?></td>
+                            <td><?php echo $rowMasyarakat['noTelp']; ?></td>
+                            <!-- Tambahkan baris lain sesuai dengan kolom yang diperlukan -->
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </div>

@@ -1,6 +1,6 @@
 <?php
-    $database = new Database();
-    $connection = $database->getConnection();
+$database = new Database();
+$connection = $database->getConnection();
 // Query untuk mengambil data tanggapan
 $queryTanggapan = "SELECT t.*, p.laporan, m.nama AS nama_masyarakat, petugas.nama_petugas
                    FROM tanggapan t
@@ -36,40 +36,42 @@ if (!$resultTanggapan) {
             <img src="assets/imgs/customer01.jpg" alt="">
         </div>
     </div>
-<div class="details">
-    <div class="recentOrders">
-        <div class="cardHeader">
-            <h2>List of Responses</h2>
-            <a href="#" class="btn">View All</a>
-        </div>
+    <div class="details">
+        <div class="recentOrders">
+            <div class="cardHeader">
+                <h2>List of Responses</h2>
+                <a href="#" class="btn">Tambah</a>
+            </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <td>Nama Masyarakat</td>
-                    <td>Laporan</td>
-                    <td>Tanggapan</td>
-                    <td>Nama Petugas</td>
-
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php
-                while ($rowTanggapan = odbc_fetch_array($resultTanggapan)) {
-                ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><?php echo $rowTanggapan['nama_masyarakat']; ?></td>
-                        <td><?php echo $rowTanggapan['laporan']; ?></td>
-                        <td><?php echo $rowTanggapan['tanggapan']; ?></td>
-                        <td><?php echo $rowTanggapan['nama_petugas']; ?></td>
-                        <!-- Tambahkan baris lain sesuai dengan kolom yang diperlukan -->
+                        <td>Nama Masyarakat</td>
+                        <td>Laporan</td>
+                        <td>Tanggapan</td>
+                        <td>Nama Petugas</td>
+                        <td>Aksi</td>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    <?php
+                    while ($rowTanggapan = odbc_fetch_array($resultTanggapan)) {
+                    ?>
+                        <tr>
+                            <td><?php echo $rowTanggapan['nama_masyarakat']; ?></td>
+                            <td><?php echo $rowTanggapan['laporan']; ?></td>
+                            <td><?php echo $rowTanggapan['tanggapan']; ?></td>
+                            <td><?php echo $rowTanggapan['nama_petugas']; ?></td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </div>
