@@ -24,4 +24,14 @@ class Database
     {
         return $this->connection;
     }
+
+    public function executeQuery($connection, $query) {
+        $result = odbc_exec($connection, $query);
+
+        if (!$result) {
+            die("Query failed: " . odbc_errormsg());
+        }
+
+        return $result;
+    }
 }
