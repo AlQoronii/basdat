@@ -1,7 +1,7 @@
 <?php
 class Database
 {
-    private $serverName = "DESKTOP-322D3F1";
+    private $serverName = "EDDO";
     private $database = "db_pengaduan";
     private $dsn; // Added the $dsn property
 
@@ -25,7 +25,8 @@ class Database
         return $this->connection;
     }
 
-    public function executeQuery($connection, $query) {
+    public function executeQuery($connection, $query)
+    {
         $result = odbc_exec($connection, $query);
 
         if (!$result) {

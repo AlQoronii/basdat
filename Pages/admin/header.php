@@ -89,6 +89,14 @@
                 </li>
 
                 <li>
+                    <a href="index.php?page=kategori">
+                        <span class="icon">
+                            <ion-icon name="newspaper-outline"></ion-icon>
+                        </span>
+                        <span class="title">Kategori</span>
+                    </a>
+                </li>
+                <li>
                     <a href="index.php?page=masyarakat">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
@@ -96,7 +104,6 @@
                         <span class="title">Masyarakat</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="index.php?page=petugas">
                         <span class="icon">
