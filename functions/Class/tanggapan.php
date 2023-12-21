@@ -11,9 +11,9 @@ class Tanggapan
     }
 
     // Create a new tanggapan
-    public function createTanggapan($id_pengaduan, $tanggapan)
+    public function createTanggapan($id_pengaduan, $tanggal,$tanggapan, $id_petugas)
     {
-        $query = "INSERT INTO tanggapan (id_pengaduan, tanggapan) VALUES ('$id_pengaduan', '$tanggapan')";
+        $query = "INSERT INTO tanggapan VALUES ('$id_pengaduan', '$tanggal', '$tanggapan','$id_petugas')";
         $result = odbc_exec($this->connection, $query);
 
         return $result;
@@ -50,5 +50,21 @@ class Tanggapan
         $result = odbc_exec($this->connection, $query);
 
         return $result;
+    }
+
+    public function addTanggapan(){
+        if(isset($_POST['submit'])){
+            $id_pengaduan = $_POST['id_pengaduan'];
+            $id_petugas = $_POST['id_petugas'];
+            $tanggal = $_POST['tanggal'];
+            $tanggapan = $_POST['tanggapan'];
+
+
+            $result = $this->createTanggapan($id_pengaduan, $tanggal,$tanggapan, $id_petugas);
+            if($result){
+                header("Location: index.php?page=aduan");
+                exit();
+            }
+        }
     }
 }
