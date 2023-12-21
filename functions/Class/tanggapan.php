@@ -37,6 +37,7 @@ class Tanggapan
     // Update an existing tanggapan
     public function updateTanggapan($id_tanggapan, $tanggapan)
     {
+        
         $query = "UPDATE tanggapan SET tanggapan = '$tanggapan' WHERE id_tanggapan = '$id_tanggapan'";
         $result = odbc_exec($this->connection, $query);
 
@@ -46,10 +47,24 @@ class Tanggapan
     // Delete an existing tanggapan
     public function deleteTanggapan($id_tanggapan)
     {
+        
         $query = "DELETE FROM tanggapan WHERE id_tanggapan = '$id_tanggapan'";
         $result = odbc_exec($this->connection, $query);
 
         return $result;
+    }
+
+    public function delete(){
+        
+        if(isset($_GET['id_pengaduan'])){
+            $id_pengaduan = $_GET['id_pengaduan'];
+
+        $result = $this->deleteTanggapan($id_tanggapan);
+        if($result){
+            header("Location: index.php?page=tanggapan");
+        }
+        }
+        
     }
 
     public function addTanggapan(){
@@ -67,4 +82,30 @@ class Tanggapan
             }
         }
     }
+
+
+    public function edit($tanggapan, $id_pengaduan) {
+        $tanggapan = addslashes($tanggapan); // Sanitize input (use appropriate validation/sanitization based on your requirements)
+    
+        $query = "UPDATE tanggapan SET tanggapan = '$tanggapan' WHERE id_pengaduan = '$id_pengaduan'";
+        $result = odbc_exec($this->connection, $query);
+    
+        return $result;
+    }
+    
+    
+
+    public function editTanggapan (){
+        if(isset($_POST['submit'])){
+            $tanggapan = $_POST['tanggapan'];
+            $id_pengaduan = $_POST['id_pengaduan'];
+
+            $result = $this->edit($tanggapan, $id_pengaduan);
+            if($result){
+                header("Location: index.php?page=tanggapan");
+                exit();
+            }
+        }
+    }
+
 }
