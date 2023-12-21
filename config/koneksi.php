@@ -1,7 +1,7 @@
 <?php
 class Database
 {
-    private $serverName = "DESKTOP-322D3F1";
+    private $serverName = "EDDO";
     private $database = "db_pengaduan";
     private $dsn; // Added the $dsn property
 
@@ -11,7 +11,7 @@ class Database
     {
         // Set the $dsn property here
         $this->dsn = "Driver={SQL Server};Server=$this->serverName;Database=$this->database;";
-        
+
         // Use the $this->dsn property in the odbc_connect function
         $this->connection = odbc_connect($this->dsn, "", "");
 
@@ -35,4 +35,3 @@ class Database
         return $result;
     }
 }
-?>
