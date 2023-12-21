@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($password === $result['password']) {
                     // Password is correct, set session variables or perform other actions
                     session_start();
-                     = $result['id_petugas'];
+                    $_SESSION['id_petugas'] = $result['id_petugas'];
                     $_SESSION['nama_petugas'] = $result['nama_petugas'];
                     $_SESSION['level'] = $result['level'];
 
