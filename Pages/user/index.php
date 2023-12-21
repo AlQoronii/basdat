@@ -88,6 +88,9 @@
 </head>
 <?php
     include "../../config/koneksi.php";
+
+    $database = new Database();
+    $connection = $database->getConnection();
 ?>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

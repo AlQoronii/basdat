@@ -125,9 +125,12 @@ if (!isset($_SESSION["nik"]) || !isset($_SESSION["password"])) {
 $nik = $_SESSION["nik"];
 $userpassword = $_SESSION["password"];
 
+
+
 // Include your database connection file or establish a connection here
 include_once("../../config/koneksi.php"); // Adjust the path accordingly
-
+$database = new Database();
+$connection = $database->getConnection();
 // Query the database for pengaduan history
 $query = "SELECT p.id_pengaduan, p.tanggal, p.nik, p.laporan, 
 p.foto, p.id_kategori, p.id_status,

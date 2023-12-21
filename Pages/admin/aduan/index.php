@@ -69,7 +69,7 @@ if (!$resultAduan) {
                     <?php } else { ?>
                 
                     <?php } ?>
-                    <a href="pages/admin/aduan/tanggapi.php" class="btn-coba">Tanggapi</a>
+                    <a href="pages/admin/aduan/indexTanggapan.php?id_pengaduan=<?= $rowAduan['id_pengaduan'] ?>" class="btn-coba">Tanggapi</a>
 
                     </div>
                     <?php

@@ -1,6 +1,9 @@
 <?php
 include_once '../config/koneksi.php';
 
+$database = new Database();
+$connection = $database->getConnection();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $username = isset($_POST["username"]) ? $_POST["username"] : '';
