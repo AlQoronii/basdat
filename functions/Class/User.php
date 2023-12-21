@@ -55,7 +55,7 @@ class User
         return odbc_fetch_array($result);
     }
 
-    public function updateUser($nik, $nama, $username, $password, $noTelp)
+    public function editUser($nik, $nama, $username, $password, $noTelp)
     {
         $connection = $this->database->getConnection();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -70,6 +70,7 @@ class User
         return true;
     }
 
+
     public function deleteUser($nik)
     {
         $connection = $this->database->getConnection();
@@ -80,8 +81,6 @@ class User
             die("Query failed: " . odbc_errormsg());
         }
 
-        return true;
+        return odbc_num_rows($result) > 0; // Return true if at least one row is affected (deletion is successful)
     }
-
-    // Tambahkan metode lain sesuai kebutuhan
 }
