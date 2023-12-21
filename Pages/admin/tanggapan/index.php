@@ -18,6 +18,7 @@ if (!$resultTanggapan) {
 }
 ?>
 
+
 <!-- ================ List of Responses/Tanggapan ================ -->
 <div class="main">
     <div class="topbar">
@@ -40,7 +41,7 @@ if (!$resultTanggapan) {
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>List of Responses</h2>
-                <a href="#" class="btn">Tambah</a>
+
             </div>
 
             <table>
