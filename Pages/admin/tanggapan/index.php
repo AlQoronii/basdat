@@ -59,7 +59,7 @@ if (!$resultTanggapan) {
                 while ($rowTanggapan = odbc_fetch_array($resultTanggapan)) {
                 ?>
                     <tr>
-                        <td><?php echo $rowTanggapan['nama_masyarakat']; ?></td>
+                        <td><?php echo $rowTanggapan['nama']; ?></td>
                         <td><?php echo $rowTanggapan['laporan']; ?></td>
                         <td><?php echo $rowTanggapan['tanggapan']; ?></td>
                         <td><?php echo $rowTanggapan['nama_petugas']; ?></td>

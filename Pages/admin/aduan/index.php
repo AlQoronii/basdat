@@ -1,15 +1,12 @@
 <?php
+    include 'functions/Class/pengaduan.php';
+
+    $pengaduan = new Pengaduan();
+    $queryAduan = $pengaduan->selectPengaduan();
+
     $database = new Database();
     $connection = $database->getConnection();
-// Query untuk mengambil data aduan
-$queryAduan = "SELECT p.*, m.nama AS nama_masyarakat, k.nama_kategori, sp.nama_status
-               FROM pengaduan p
-               INNER JOIN masyarakat m ON p.nik = m.nik
-               INNER JOIN kategori k ON p.id_kategori = k.id_kategori
-               INNER JOIN status_pengaduan sp ON p.id_status = sp.id_status
-               ORDER BY p.tanggal DESC"; // Sesuaikan dengan kolom yang diperlukan
 
-// Melakukan query ke database
 $resultAduan = odbc_exec($connection, $queryAduan);
 
 // Mengecek apakah query berhasil dieksekusi
@@ -40,8 +37,7 @@ if (!$resultAduan) {
     <div class="details">
         <div class="recentOrders">
             <div class="cardHeader">
-                <h2>Aduan Terbaru</h2>
-                <a href="#" class="btn">View All</a>
+                <h2>List Pengaduan</h2>
             </div>
 
             <table>
@@ -56,37 +52,50 @@ if (!$resultAduan) {
                 </thead>
 
                 <tbody>
+        <?php
+        while ($rowAduan = odbc_fetch_array($resultAduan)) {
+            ?>
+            <tr>
+                <td><?= $rowAduan['nama_masyarakat'] ?></td>
+                <td><?=$rowAduan['laporan'] ?></td>
+                <td><?= $rowAduan['foto'] ?></td>
+                <td><?=  $rowAduan['nama_status'] ?></td>
+                <td>
+                    <div class="d-flex">
+                    <?php if ($rowAduan['nama_status'] == 'Terkirim') { ?>
+                        <a href="index.php?page=aduan&action=2&id_pengaduan=<?= $rowAduan['id_pengaduan']; ?>"><button class="btn-coba">Proses</button></a>
+                    <?php } elseif ($rowAduan['nama_status'] == 'Diproses') { ?>
+                        <a href="index.php?page=aduan&action=3&id_pengaduan=<?= $rowAduan['id_pengaduan']; ?>"><button class="btn-selesai">Selesaikan</button></a>
+                    <?php } else { ?>
+                
+                    <?php } ?>
+                    <a href="pages/admin/aduan/tanggapi.php" class="btn-coba">Tanggapi</a>
+
+                    </div>
                     <?php
-                    while ($rowAduan = odbc_fetch_array($resultAduan)) {
-                    ?>
-                        <tr>
-                            <td><?php echo $rowAduan['nama_masyarakat']; ?></td>
-                            <td><?php echo $rowAduan['laporan']; ?></td>
-                            <td><?php echo $rowAduan['foto']; ?></td>
-                            <td><span class="status <?php echo strtolower($rowAduan['nama_status']); ?>"><?php echo $rowAduan['nama_status']; ?></span></td>
-                            <td>
-                            <?php   
-                                if ($rowAduan->status == 'Terkirim')
-                            ?>
-                                <a href="index.php?Diproses, $rowAduan->id_pengaduan" class="btn btn-primary"><i class="fas fa-keyboard"></i> Diproses</a>
-                            <?php
-                                elseif($$rowAduan->status == 'Diproses')
-                            ?>
-                                <a href="index.php?Selesai ,$rowAduan->id_pengaduan" class="btn btn-success"><i class="fas fa-check"></i> Selesaikan</a>
-                            <?php        
-                                else                
-                            ?>
-                            <?php
-                                endif
-                                ?>
-                                <a href="tanggapan/index.php?id_pengaduan=<?= $rowAduan['id_pengaduan'] ?>" class="btn btn-warning"><i class="far fa-comment-dots"></i> Tanggapi</a>
-                                
-                            </td>
-                        </tr>
-                    <?php
+                    if (isset($_GET['action']) && isset($_GET['id_pengaduan']) && $_GET['id_pengaduan'] == $rowAduan['id_pengaduan']) {
+                        if ($_GET['action'] == 2 && $rowAduan['nama_status'] == 'Terkirim') {
+                            $queryEdit = "UPDATE pengaduan SET id_status = 2 WHERE id_pengaduan = " . $rowAduan['id_pengaduan'];
+                            $resultEdit = odbc_exec($connection, $queryEdit);
+                        } elseif ($_GET['action'] == 3 && $rowAduan['nama_status'] == 'Diproses') {
+                            $queryEdit = "UPDATE pengaduan SET id_status = 3 WHERE id_pengaduan = " . $rowAduan['id_pengaduan'];
+                            $resultEdit = odbc_exec($connection, $queryEdit);
+
+                        }
+                        header("Location: index.php?page=aduan&id_pengaduan=" . $rowAduan['id_pengaduan']);
+                            exit();
                     }
                     ?>
-                </tbody>
+            </td>
+        </tr>
+        
+        <?php
+    }
+    ?>
+</tbody>
+
+
+
             </table>
         </div>
 </div>
