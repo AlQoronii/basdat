@@ -17,7 +17,7 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('../../assets/bg2.png'); /* Replace 'path/to/your/bg2.png' with the actual path to your image */
+    background-image: url('../../assets/12.jpg'); /* Replace 'path/to/your/bg2.png' with the actual path to your image */
     background-size: cover; /* This property ensures that the background image covers the entire viewport */
     background-repeat: no-repeat; /* This property prevents the background image from repeating */
     background-position: center center; /* This property centers the background image */
@@ -108,7 +108,7 @@
                         <a class="nav-link" href="history.php"><h5>History</h5></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../functions/logout.php"><h5>Logout</h5></a>
+                        <a class="nav-link btn btn-primary text-white" href="../../functions/logout.php">Logout</a>
                     </li>
                 </ul>
             </div>

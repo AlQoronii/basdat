@@ -40,7 +40,7 @@ if (!$resultAduan) {
                 <h2>List Pengaduan</h2>
             </div>
 
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <td>Nama</td>
@@ -84,22 +84,26 @@ if (!$resultAduan) {
                 </div>
             </div>
             </form>
+            <?php
+                $text = $rowAduan['laporan'];
+                $laporan = substr($text, 0, 10) . '...'; 
+            ?>
             <tr>
                 <td><?= $rowAduan['nama_masyarakat'] ?></td>
-                <td><?=$rowAduan['laporan'] ?></td>
+                <td><?=$laporan ?></td>
                 <td><?= $rowAduan['foto'] ?></td>
                 <td><?=  $rowAduan['nama_status'] ?></td>
                 <td>
-                    <div class="d-flex">
+                    <div class="">
                     <?php if ($rowAduan['nama_status'] == 'Terkirim') { ?>
-                        <a href="index.php?page=aduan&action=2&id_pengaduan=<?= $rowAduan['id_pengaduan']; ?>"><button class="btn-coba">Proses</button></a>
+                        <a href="index.php?page=aduan&action=2&id_pengaduan=<?= $rowAduan['id_pengaduan']; ?>"><button class="btn btn-primary m-1">Proses</button></a>
                     <?php } elseif ($rowAduan['nama_status'] == 'Diproses') { ?>
-                        <a href="index.php?page=aduan&action=3&id_pengaduan=<?= $rowAduan['id_pengaduan']; ?>"><button class="btn-selesai">Selesaikan</button></a>
+                        <a href="index.php?page=aduan&action=3&id_pengaduan=<?= $rowAduan['id_pengaduan']; ?>"><button class="btn btn-success m-1">Selesai</button></a>
                     <?php } else { ?>
                 
                     <?php } ?>
-                    <a href='index.php?page=edit&id=<?= $rowAduan['id_pengaduan'] ?>' data-bs-toggle="modal" data-bs-target="#myModal<?= $rowAduan['id_pengaduan'] ?>" class="btn-coba">Tanggapi</a>
-
+                    <a href='index.php?page=edit&id=<?= $rowAduan['id_pengaduan'] ?>' data-bs-toggle="modal" data-bs-target="#myModal<?= $rowAduan['id_pengaduan'] ?>"><button class="btn btn-warning">Tanggapi</button></a>
+                    
                     </div>
                     <?php
                     if (isset($_GET['action']) && isset($_GET['id_pengaduan']) && $_GET['id_pengaduan'] == $rowAduan['id_pengaduan']) {

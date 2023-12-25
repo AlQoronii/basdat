@@ -18,7 +18,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('../../assets/bg2.png');
+            background-image: url('../../assets/12.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
@@ -98,13 +98,17 @@
                         <a class="nav-link" href="history.php"><h5>History</h5></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../functions/logout.php"><h5>Logout</h5></a>
+                        <a class="nav-link btn btn-primary text-white" href="../../functions/logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 <?php
+include '../../config/koneksi.php';
+$database = new Database();
+$connection = $database->getConnection();
+
 if (isset($_GET['id_pengaduan'])) {
     $id_pengaduan = filter_var($_GET['id_pengaduan'], FILTER_SANITIZE_NUMBER_INT);
 
@@ -139,11 +143,11 @@ if (isset($_GET['id_pengaduan'])) {
                             $text = $data['tanggapan'];
                             $tanggapan = substr($text, 0, 200) . '...';
                             ?>
-                            <h5 class="text-warning">Tanggapan - <?php echo $data['tgl_tanggapan']; ?></h5>
+                            <h5 class="text-success">Tanggapan - <?php echo $data['tgl_tanggapan']; ?></h5>
                             <hr>
                             <?php echo $tanggapan; ?>
                             <hr>
-                            <a href="#" id="swalButton" class="btn btn-warning px-5 text-light float-right"
+                            <a href="#" id="swalButton" class="btn btn-success px-5 text-light float-right"
    style="border-radius: 25px;">Detail</a>
                         </div>
                     </div>

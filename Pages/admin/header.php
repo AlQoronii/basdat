@@ -63,6 +63,15 @@
         color: var(--white);
         border-radius: 6px;
     }
+
+    .btn-tanggapi {
+        position: relative;
+        padding: 5px 10px;
+        background: orange;
+        text-decoration: none;
+        color: var(--white);
+        border-radius: 6px;
+    }
 </style>
 
 <body>
