@@ -6,7 +6,8 @@ $nik = $_SESSION['nik'];
 
 if (isset($_POST['submit'])) {
     require '../config/koneksi.php';
-
+    $database = new Database();
+    $connection = $database->getConnection();
     // Check if the file input is set and not empty
     if (!empty($_FILES["file"]["name"])) {
         $namaFile = $_FILES["file"]["name"];

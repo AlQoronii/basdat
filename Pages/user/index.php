@@ -142,7 +142,7 @@
         </div>
         <div class="mb-3 row form-group">
             <label for="">Foto :</label>
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 <input type="file" class="form-control" name="file" required>
             </div>
         </div>
