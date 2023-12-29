@@ -64,13 +64,21 @@ if (!$resultAduan) {
                             <h5 class="modal-title">Pengaduan</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        
                         <div class="modal-body">
-                            <p><strong>NIK:</strong> <?= $rowAduan['nik'] ?></p>
-                            <p><strong>Nama:</strong> <?= $rowAduan['nama_masyarakat'] ?></p>
-                            <p><strong>Laporan:</strong> <?= $rowAduan['laporan'] ?></p>
+                            <div class="row mb-3">
+                                <div class="col-2"><strong>NIK</strong></div>
+                                <div class="col-10">: <?= $rowAduan['nik'] ?></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-2"><strong>Nama</strong> </div>
+                                <div class="col-10">: <?= $rowAduan['nama_masyarakat'] ?></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-2"><strong>Laporan</strong></div>
+                                <div class="col-10">: <?= $rowAduan['laporan'] ?></div>
+                            </div>
                             <div class="mb-3">
-                                <label for="response<?= $rowAduan['id_pengaduan'] ?>" class="form-label">Tanggapan:</label>
+                                <label for="response<?= $rowAduan['id_pengaduan'] ?>" class="form-label"><strong>Tanggapan</strong></label>
                                 <textarea class="form-control" id="tanggapan" name="tanggapan"></textarea>
                             </div>
                         </div>
