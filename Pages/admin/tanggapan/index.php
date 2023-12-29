@@ -93,7 +93,7 @@ if (!$resultTanggapan) {
                                         <div class="col-10">: <?= $rowTanggapan['laporan'] ?></div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="tanggapan<?= $rowTanggapan['id_pengaduan'] ?>" class="form-label">Tanggapan</label>
+                                        <label for="tanggapan<?= $rowTanggapan['id_pengaduan'] ?>" class="form-label"><strong>Tanggapan</strong></label>
                                         <textarea class="form-control" id="tanggapan<?= $rowTanggapan ?>" name="tanggapan"><?= $rowTanggapan['tanggapan'] ?></textarea>
                                     </div>
                                 </div>
@@ -109,13 +109,17 @@ if (!$resultTanggapan) {
                         <?php
                             $text = $rowTanggapan['laporan'];
                             $laporan = substr($text, 0, 10) . '...';
+
+
+                            $res = $rowTanggapan['tanggapan'];
+                            $tanggapan = substr($res, 0, 10) . '...';
                         ?>
 
                         <tr>
                             
                             <td><?= $rowTanggapan['nama_masyarakat'] ?></td>
                             <td><div class="d-flex"><?= $laporan; ?></div></td>
-                            <td><div class="d-flex"><?= $rowTanggapan['tanggapan'] ?></div></td>
+                            <td><div class="d-flex"><?= $tanggapan; ?></div></td>
                             <td><?= $rowTanggapan['nama_petugas'] ?></td>
                             <td>
                                 <div class="d-flex">

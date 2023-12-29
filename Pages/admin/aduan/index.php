@@ -44,6 +44,7 @@ if (!$resultAduan) {
                 <thead>
                     <tr>
                         <td>Nama</td>
+                        <td>Kategori</td>
                         <td>Laporan</td>
                         <td>Foto</td>
                         <td>Status</td>
@@ -90,6 +91,7 @@ if (!$resultAduan) {
             ?>
             <tr>
                 <td><?= $rowAduan['nama_masyarakat'] ?></td>
+                <td><?= $rowAduan['nama_kategori'] ?></td>
                 <td><?=$laporan ?></td>
                 <td><?= $rowAduan['foto'] ?></td>
                 <td><?=  $rowAduan['nama_status'] ?></td>
