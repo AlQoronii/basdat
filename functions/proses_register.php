@@ -1,5 +1,8 @@
 <?php
 require_once '../config/koneksi.php'; // Assuming koneksi.php includes the ODBC connection
+$database = new Database();
+$connection = $database->getConnection();
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
