@@ -1,7 +1,7 @@
 <?php
 class Database
-{   
-    private $serverName = "DESKTOP-322D3F1";
+{
+    private $serverName = "EDDO"; //DESKTOP-322D3F1
     private $database = "db_pengaduan";
     private $dsn; // Added the $dsn property
 
